@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.sqlite3"
+}
+
+generator custom_generator {
+    provider = "prisma-generator-fake-data"
+    output   = "../types/fake-data.ts"
+}
+
+
+model TicketType {
+  id Int @id @default(autoincrement())
+  name String
+  note String?
+  isActive Boolean @default(true)
+  tickets Ticket[]
+}
+
+model Department {
+  id Int @id @default(autoincrement())
+  name String
+  note String?
+  isActive Boolean @default(true)
+  tickets Ticket[]
+}
+
+model Category {
+  id Int @id @default(autoincrement())
+  name String
+  note String?
+  isActive Boolean @default(true)
+  tickets Ticket[]
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  externalId String @unique
+  isActive Boolean @default(true)
+
+  tickets Ticket[]
+}
+
+model Ticket {
+  id Int @id @default(autoincrement())
+  name String
+  comment String?
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  departmentId Int
+  department Department @relation(fields: [departmentId], references: [id])
+  categoryId Int
+  category Category @relation(fields: [categoryId], references: [id])
+  ticketTypeId Int
+  status String
+  ticketType TicketType @relation(fields: [ticketTypeId], references: [id])
+}

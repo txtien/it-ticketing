@@ -1,4 +1,4 @@
-import {  } from '@prisma/client';
+import {  } from '/Users/tientran/mine/projects/it-helpdesk/prisma/generated/client';
 import { faker } from '@faker-js/faker';
 import Decimal from 'decimal.js';
 
@@ -69,13 +69,13 @@ export function fakeTicket() {
 }
 export function fakeTicketComplete() {
   return {
-    id: faker.number.int({min: 50, max: 5000}),
+    id: faker.number.int(),
     name: faker.person.fullName(),
-    comment: faker.lorem.words(20),
-    userId: 1,
-    departmentId: 1,
-    categoryId: 1,
-    ticketTypeId: 1,
+    comment: undefined,
+    userId: faker.number.int(),
+    departmentId: faker.number.int(),
+    categoryId: faker.number.int(),
+    ticketTypeId: faker.number.int(),
     status: faker.lorem.words(5),
   };
 }
