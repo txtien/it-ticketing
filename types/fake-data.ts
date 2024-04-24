@@ -1,8 +1,5 @@
-import {  } from '/Users/tientran/mine/projects/it-helpdesk/prisma/generated/client';
 import { faker } from '@faker-js/faker';
 import Decimal from 'decimal.js';
-
-
 
 export function fakeTicketType() {
   return {
