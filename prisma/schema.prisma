@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "./dev.sqlite3"
+  url      = "file:./dev.sqlite3"
 }
 
 model TicketType {

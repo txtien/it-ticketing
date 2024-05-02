@@ -41,9 +41,9 @@ const TicketTable = ({
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">#</TableHead>
-            <TableHead>Tên</TableHead>
-            <TableHead className="text-right">Trạng thái</TableHead>
-            <TableHead className="text-right">Hành động</TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead className="text-right">Status</TableHead>
+            <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

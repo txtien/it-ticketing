@@ -9,21 +9,23 @@ import {
   Building,
   TicketIcon,
   Boxes,
+  MenuIcon,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import "./Sidebar.scss";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const menus = [
   {
     id: 1,
-    name: "Dashboard",
+    name: "Tickets",
     icon: <LayoutDashboard />,
     children: null,
     url: "/",
   },
-  { id: 2, name: "Tickets", icon: <Ticket />, children: null, url: "/tickets" },
   {
     id: 3,
     name: "Settings",
@@ -52,29 +54,41 @@ const Sidebar = () => {
   const router = useRouter();
 
   return (
-    <div className="w-80 min-h-screen overflow-auto bg-primary">
-      <h1 className="text-center text-white mt-4 font-bold text-2xl">
-        Help Ticket
-      </h1>
-      <div className="w-full flex justify-center items-center">
+    <div className="h-screen w-20 fixed sm:relative z-10 sm:w-64 overflow-auto bg-primary sidebar">
+      <div className="heading flex mt-4 items-center gap-2 pl-8">
+        <Image
+          src={"/logo.png"}
+          alt="logo"
+          width={60}
+          height={60}
+          className="h-8 w-auto"
+        />
+        <h1 className="hidden sm:block flex-1 text-white font-bold text-lg m-0">
+          Ticketing
+        </h1>
+      </div>
+      <div className="w-full mt-4 px-8 hidden sm:flex justify-center items-center">
         <Button asChild variant={"ghost"}>
           <Link
             href="/create-ticket"
-            className="bg-white text-black hover:bg-gray-100 flex mx-auto mt-4 w-1/2"
+            className="bg-white text-black hover:bg-gray-100 flex justify-center mt-4 gap-2 w-fit"
           >
-            <CirclePlus className="w-4 h-4 mr-2" /> Create New
+            <CirclePlus size={16} /> Create New
           </Link>
         </Button>
       </div>
-      <ul className="px-8 flex flex-col gap-4 pt-16">
+      <span className="w-full flex justify-center mt-4">
+        <MenuIcon className="block sm:hidden" color="#fff" />
+      </span>
+      <ul className="sm:px-4 flex flex-col gap-4 pt-8">
         {menus.map((menu) => {
           return (
             <React.Fragment key={menu.id}>
               <li
                 className={cn(
-                  "flex gap-2 items-center text-white cursor-pointer hover:bg-blue-300 py-2 px-4 rounded-sm",
+                  "flex flex-col sm:flex-row gap-2 justify-center sm:justify-start sm:pl-4 items-center text-white cursor-pointer py-2 rounded-sm item-menu",
                   {
-                    "bg-blue-200": pathName === menu.url,
+                    active: pathName === menu.url,
                   }
                 )}
                 onClick={() => {
@@ -85,26 +99,29 @@ const Sidebar = () => {
                   }
                 }}
               >
-                {menu.icon}
-                <span>{menu.name}</span>
+                <span className="icon">{menu.icon}</span>
+                <span className="text-xs sm:text-base">{menu.name}</span>
               </li>
               {menu.children && menu.children.length > 0 && showChildren && (
-                <ul className="flex flex-col gap-2 pl-8">
+                <ul className="flex flex-col gap-2 sm:pl-4 w-full">
                   {menu.children.map((child) => {
                     return (
-                      <Link
-                        key={child.id}
-                        href={child.url}
-                        className={cn(
-                          "flex gap-2 items-center text-white cursor-pointer hover:bg-blue-300 py-2 px-4 rounded-sm",
-                          {
-                            "bg-blue-200": pathName === child.url,
-                          }
-                        )}
-                      >
-                        {child.icon}
-                        <span>{child.name}</span>
-                      </Link>
+                      <li key={child.id}>
+                        <Link
+                          href={child.url}
+                          className={cn(
+                            "flex flex-col sm:flex-row gap-2 items-center text-white cursor-pointer py-2 sm:px-4 sm:justify-start rounded-sm item-menu --child",
+                            {
+                              active: pathName === child.url,
+                            }
+                          )}
+                        >
+                          {child.icon}
+                          <span className="text-xs sm:text-base">
+                            {child.name}
+                          </span>
+                        </Link>
+                      </li>
                     );
                   })}
                 </ul>

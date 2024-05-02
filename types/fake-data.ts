@@ -66,13 +66,13 @@ export function fakeTicket() {
 }
 export function fakeTicketComplete() {
   return {
-    id: faker.number.int(),
+    id: faker.number.int({min: 0, max: 500}),
     name: faker.person.fullName(),
     comment: undefined,
     userId: faker.number.int(),
-    departmentId: faker.number.int(),
-    categoryId: faker.number.int(),
-    ticketTypeId: faker.number.int(),
+    departmentId: 1,
+    categoryId: 1,
+    ticketTypeId: 1,
     status: faker.lorem.words(5),
   };
 }

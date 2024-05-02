@@ -21,7 +21,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <div className="flex w-full">
+          <div className="flex w-full h-screen overflow-auto">
             <Sidebar />
             {children}
           </div>

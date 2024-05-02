@@ -113,7 +113,10 @@ const CreateTicketForm = ({ ticket, dataSource }: Props) => {
   }
 
   return (
-    <div className="px-4 pt-16 flex-1">
+    <div className="px-12 pt-16 flex-1">
+      <h1 className="text-2xl text-center text-primary">
+        {ticket ? `Chỉnh sửa ${ticket.name}` : "Tạo mới Ticket"}
+      </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className="w-full flex gap-4 mt-8">
@@ -127,6 +130,7 @@ const CreateTicketForm = ({ ticket, dataSource }: Props) => {
                     <Input
                       type={"text"}
                       id={"subject"}
+                      placeholder="Tên phiếu"
                       className={
                         "focus-visible:ring-0 focus-visible:ring-offset-0"
                       }
@@ -148,6 +152,7 @@ const CreateTicketForm = ({ ticket, dataSource }: Props) => {
                   <FormControl>
                     <Textarea
                       id={"comment"}
+                      placeholder="Nội dung chi tiết"
                       className={
                         "focus-visible:ring-0 focus-visible:ring-offset-0"
                       }
@@ -266,7 +271,9 @@ const CreateTicketForm = ({ ticket, dataSource }: Props) => {
               )}
             />
           </div>
-          <Button type="submit">{ticket ? "Cập nhật" : "Tạo ticket"}</Button>
+          <div className="w-full flex justify-center">
+            <Button type="submit">{ticket ? "Cập nhật" : "Tạo ticket"}</Button>
+          </div>
         </form>
       </Form>
     </div>
